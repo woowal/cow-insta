@@ -1,0 +1,33 @@
+server:
+  port: 8080
+
+spring:
+  datasource:
+    url: jdbc:mysql://localhost:3307/jpa?serverTimezone=UTC
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    username: root
+    password: mysql
+
+  jpa:
+    hibernate:
+      ddl-auto: create
+    database-platform: org.hibernate.dialect.MySQL8Dialect
+
+    show_sql: true
+    properties:
+      hibernate:
+        format_sql: true
+    defer-datasource-initialization: true
+
+cloud:
+  aws:
+    s3:
+      bucket: cowinsta
+    credentials:
+      access-key: AKIAU6GDW5F3RS5UN2IX
+      secret-key: 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
+    region:
+      static: ap-northeast-2
+      auto: false
+    stack:
+      auto: false
