@@ -26,6 +26,13 @@ dependencies {
     implementation 'org.springframework.cloud:spring-cloud-starter-aws:2.2.6.RELEASE'
     implementation 'org.springframework.boot:spring-boot-starter-web'
     implementation 'org.springframework.boot:spring-boot-starter-web'
+    implementation 'org.springframework.boot:spring-boot-starter-security'
+    implementation("org.springdoc:springdoc-openapi-starter-webmvc-ui:2.2.0"){
+        exclude group: "io.swagger.core.v3", module:"swagger-annotations"
+    }
+    implementation 'io.swagger.core.v3:swagger-annotations:2.2.15'
+    implementation("io.springfox:springfox-swagger2:2.9.2")
+    implementation("io.springfox:springfox-swagger-ui:2.9.2")
     compileOnly 'org.projectlombok:lombok'
     runtimeOnly 'com.mysql:mysql-connector-j'
     annotationProcessor 'org.projectlombok:lombok'
