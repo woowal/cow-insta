@@ -9,21 +9,21 @@ import java.util.List;
 public class PostResponse {
 
     private Long id;
-    private String title;
+    private String imageUrl;
     private String name;
     private String content;
     private List<String> comments;
 
-    public PostResponse(Long id, String title, String name, String content, List<String> comments) {
+    public PostResponse(Long id, String imageUrl, String name, String content, List<String> comments) {
         this.id = id;
-        this.title = title;
+        this.imageUrl = imageUrl;
         this.name = name;
         this.content = content;
         this.comments = comments;
     }
 
     public static PostResponse from(Post post, String name, List<String> comments) {
-        return new PostResponse(post.getId(), post.getTitle(), name, post.getContent(), comments);
+        return new PostResponse(post.getId(), post.getImageUrl(), name, post.getContent(), comments);
     }
 
 }

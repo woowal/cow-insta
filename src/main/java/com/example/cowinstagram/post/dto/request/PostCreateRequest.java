@@ -8,13 +8,13 @@ import lombok.Getter;
 public class PostCreateRequest {
 
     private Long member;
-    private String title;
+    private String imageUrl;
     private String content;
 
     public Post toEntity(Member member) {
         return Post.builder()
                 .member(member)
-                .title(this.title)
+                .imageUrl(this.imageUrl)
                 .content(this.content)
                 .build();
     }

@@ -48,7 +48,7 @@ public class PostService {
     public void update(Long id, PostUpdateRequest postUpdateRequest) {
         Post post = postRepository.findById(id)
                 .orElseThrow(() -> new NoSuchElementException("게시글이 존재하지 않습니다."));
-        post.update(postUpdateRequest.getTitle(), postUpdateRequest.getContent());
+        post.update(postUpdateRequest.getImageUrl(), postUpdateRequest.getContent());
     }
 
     @Transactional

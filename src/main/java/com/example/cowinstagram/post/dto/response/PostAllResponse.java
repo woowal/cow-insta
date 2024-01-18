@@ -7,16 +7,16 @@ import lombok.Getter;
 public class PostAllResponse {
 
     private Long id;
-    private String title;
+    private String imageUrl;
     private String content;
 
-    public PostAllResponse(Long id, String title, String content) {
+    public PostAllResponse(Long id, String imageUrl, String content) {
         this.id = id;
-        this.title = title;
+        this.imageUrl = imageUrl;
         this.content = content;
     }
 
     public static PostAllResponse from(Post post) {
-        return new PostAllResponse(post.getId(), post.getTitle(), post.getContent());
+        return new PostAllResponse(post.getId(), post.getImageUrl(), post.getContent());
     }
 }

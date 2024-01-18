@@ -1,6 +1,5 @@
 package com.example.cowinstagram.comment.domain;
 
-
 import com.example.cowinstagram.member.domain.Member;
 import com.example.cowinstagram.post.domain.Post;
 import jakarta.persistence.*;

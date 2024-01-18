@@ -20,18 +20,18 @@ public class Post {
     @JoinColumn(name = "member")
     private Member member;
 
-    private String title;
+    private String imageUrl;
     private String content;
 
     @Builder
-    public Post(Member member, String title, String content) {
+    public Post(Member member, String imageUrl, String content) {
         this.member = member;
-        this.title = title;
+        this.imageUrl = imageUrl;
         this.content = content;
     }
 
     public void update(String title, String content) {
-        this.title = title;
+        this.imageUrl = title;
         this.content = content;
     }
 }
