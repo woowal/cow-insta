@@ -1,6 +1,5 @@
 package com.example.cowinstagram.member.controller;
 
-import com.example.cowinstagram.member.dto.request.MemberCreateRequest;
 import com.example.cowinstagram.member.dto.request.MemberUpdateRequest;
 import com.example.cowinstagram.member.dto.response.MemberResponse;
 import com.example.cowinstagram.member.service.MemberService;
@@ -8,22 +7,12 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
-
 @RestController
 @RequestMapping("api/members")
 @RequiredArgsConstructor
 public class MemberController {
 
     private final MemberService memberService;
-
-    @PostMapping
-    public ResponseEntity<Void> create(@RequestBody MemberCreateRequest memberCreateRequest) {
-
-        memberService.create(memberCreateRequest);
-
-        return ResponseEntity.ok().build();
-    }
 
     @GetMapping("/{id}")
     public ResponseEntity<MemberResponse> findOne(@PathVariable("id") Long id) {
@@ -49,12 +38,5 @@ public class MemberController {
         return ResponseEntity.ok().build();
     }
 
-    @GetMapping
-    public ResponseEntity<List> findAll() {
-
-        List<MemberResponse> memberResponses = memberService.findAll();
-
-        return ResponseEntity.ok(memberResponses);
-    }
 }
 
