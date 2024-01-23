@@ -27,7 +27,7 @@ cloud:
       access-key: AKIAU6GDW5F3RS5UN2IX
       secret-key: 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
     region:
-      static: ap-northeast-2
+      static: ap-southeast-2
       auto: false
     stack:
       auto: false

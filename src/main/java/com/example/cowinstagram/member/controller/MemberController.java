@@ -7,6 +7,8 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("api/members")
 @RequiredArgsConstructor
@@ -38,5 +40,12 @@ public class MemberController {
         return ResponseEntity.ok().build();
     }
 
+    @GetMapping
+    public ResponseEntity<List> findAll() {
+
+        List<MemberResponse> memberResponses = memberService.findAll();
+
+        return ResponseEntity.ok(memberResponses);
+    }
 }
 

@@ -8,7 +8,9 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
 import java.util.NoSuchElementException;
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -34,6 +36,13 @@ public class MemberService {
     @Transactional
     public void delete(Long id) {
         memberRepository.deleteById(id);
+    }
+
+    @Transactional(readOnly = true)
+    public List<MemberResponse> findAll() {
+        return memberRepository.findAll().stream()
+                .map(MemberResponse::from)
+                .collect(Collectors.toList());
     }
 }
 

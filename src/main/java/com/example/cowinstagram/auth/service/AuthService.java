@@ -1,5 +1,6 @@
 package com.example.cowinstagram.auth.service;
 
+import com.example.cowinstagram.amazonS3.AmazonS3Service;
 import com.example.cowinstagram.auth.JwtToken;
 import com.example.cowinstagram.auth.TokenProvider;
 import com.example.cowinstagram.auth.dto.request.AuthLogInRequest;
@@ -13,7 +14,9 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
 import java.util.NoSuchElementException;
 
 @Service
@@ -23,7 +26,7 @@ public class AuthService {
 
     private final BCryptPasswordEncoder encoder;
     private final MemberRepository memberRepository;
-    private final AuthenticationManagerBuilder authenticationManagerBuilder;
+    private final AmazonS3Service amazonS3Service;
     private final TokenProvider tokenProvider;
 
     public JwtToken logIn(AuthLogInRequest authLogInRequest) {
@@ -37,8 +40,11 @@ public class AuthService {
     }
 
     @Transactional
-    public void register(AuthRegisterRequest authRegisterRequest) {
-        memberRepository.save(authRegisterRequest.toEntity());
+    public void register(AuthRegisterRequest authRegisterRequest, MultipartFile multipartFile) throws IOException {
+        Member member = authRegisterRequest.toEntity();
+        String imageUrl = amazonS3Service.saveFile(multipartFile);
+        member.updateImageUrl(imageUrl);
+        memberRepository.save(member);
     }
 
     private boolean matches(String a, String b) {

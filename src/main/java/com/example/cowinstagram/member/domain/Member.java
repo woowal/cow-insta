@@ -16,9 +16,11 @@ public class Member {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @Column(unique = true)
     private String userId;
     private String name;
     private String password;
+    private String imageUrl;
 
     @Builder
     public Member(String userId, String name, String password) {
@@ -31,5 +33,10 @@ public class Member {
         this.userId = memberUpdateRequest.getUserId();
         this.name = memberUpdateRequest.getName();
         this.password = memberUpdateRequest.getPassword();
+        this.imageUrl = memberUpdateRequest.getImageUrl();
+    }
+
+    public void updateImageUrl(String imageUrl) {
+        this.imageUrl = imageUrl;
     }
 }
