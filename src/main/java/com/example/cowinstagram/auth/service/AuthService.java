@@ -25,15 +25,28 @@ public class AuthService {
     private final MemberRepository memberRepository;
     private final AuthenticationManagerBuilder authenticationManagerBuilder;
     private final TokenProvider tokenProvider;
+
     public JwtToken logIn(AuthLogInRequest authLogInRequest) {
-        UsernamePasswordAuthenticationToken authenticationToken = new UsernamePasswordAuthenticationToken(authLogInRequest.getUserId(), authLogInRequest.getPassword());
-        Authentication authentication = authenticationManagerBuilder.getObject().authenticate(authenticationToken);
+        Member logInMember = memberRepository.findByUserId(authLogInRequest.getUserId())
+                .filter(member -> matches(member.getPassword(), authLogInRequest.getPassword()))
+                .orElseThrow(() -> new NoSuchElementException("로그인에 실패하였습니다."));
+        String authentication = String.format("%s:%s", logInMember.getId(), null);
         JwtToken token = tokenProvider.generateToken(authentication);
+
         return token;
     }
 
     @Transactional
     public void register(AuthRegisterRequest authRegisterRequest) {
         memberRepository.save(authRegisterRequest.toEntity());
+    }
+
+    private boolean matches(String a, String b) {
+        System.out.println("a: " + a);
+        System.out.println("b: " + b);
+        if (a.matches(b)) {
+            return true;
+        }
+        return false;
     }
 }

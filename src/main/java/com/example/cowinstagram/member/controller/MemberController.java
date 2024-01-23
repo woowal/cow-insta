@@ -15,7 +15,7 @@ public class MemberController {
     private final MemberService memberService;
 
     @GetMapping("/{id}")
-    public ResponseEntity<MemberResponse> findOne(@PathVariable("id") Long id) {
+    public ResponseEntity<MemberResponse> findOne(@PathVariable("id") String id) {
 
         MemberResponse memberResponse = memberService.findOne(id);
 

@@ -25,7 +25,7 @@ public class AuthController {
     }
 
     @PostMapping("/register")
-    public ResponseEntity<Void> register(@RequestBody AuthRegisterRequest authRegisterRequest) { // 안되면 어노테이션 import 스웨거로 변경
+    public ResponseEntity<Void> register(@RequestBody AuthRegisterRequest authRegisterRequest) {
 
         authService.register(authRegisterRequest);
 

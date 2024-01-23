@@ -17,8 +17,8 @@ public class MemberService {
     private final MemberRepository memberRepository;
 
     @Transactional(readOnly = true)
-    public MemberResponse findOne(Long id) {
-        Member member = memberRepository.findById(id)
+    public MemberResponse findOne(String id) {
+        Member member = memberRepository.findByUserId(id)
                 .orElseThrow(() -> new NoSuchElementException("멤버가 존재하지 않습니다."));
 
         return MemberResponse.from(member);
