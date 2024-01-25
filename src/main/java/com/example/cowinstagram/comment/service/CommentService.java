@@ -7,6 +7,7 @@ import com.example.cowinstagram.comment.dto.request.CommentUpdateRequest;
 import com.example.cowinstagram.comment.dto.response.CommentResponse;
 import com.example.cowinstagram.member.domain.Member;
 import com.example.cowinstagram.post.domain.Post;
+import com.example.cowinstagram.reply.service.ReplyService;
 import com.example.cowinstagram.repository.CommentRepository;
 import com.example.cowinstagram.repository.MemberRepository;
 import com.example.cowinstagram.repository.PostRepository;
@@ -25,6 +26,7 @@ public class CommentService {
     private final CommentRepository commentRepository;
     private final MemberRepository memberRepository;
     private final PostRepository postRepository;
+    private final ReplyService replyService;
 
     @Transactional
     public void create(CommentCreateRequest commentCreateRequest) {
@@ -50,6 +52,8 @@ public class CommentService {
 
     @Transactional
     public void delete(Long id) {
+        Comment comment = commentRepository.findById(id).get();
+        replyService.deleteAllByComment(comment);
         commentRepository.deleteById(id);
     }
 
@@ -71,6 +75,8 @@ public class CommentService {
 
     @Transactional
     public void deleteAllByPost(Post post) {
+        List<Comment> comments = commentRepository.findAllByPost(post);
+        replyService.deleteAllByComments(comments);
         commentRepository.deleteAllByPost(post);
     }
 

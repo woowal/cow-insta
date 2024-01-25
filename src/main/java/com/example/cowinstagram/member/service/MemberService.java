@@ -7,6 +7,7 @@ import com.example.cowinstagram.member.domain.Member;
 import com.example.cowinstagram.member.dto.request.MemberUpdateRequest;
 import com.example.cowinstagram.member.dto.response.MemberResponse;
 import com.example.cowinstagram.post.service.PostService;
+import com.example.cowinstagram.reply.service.ReplyService;
 import com.example.cowinstagram.repository.MemberRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -25,6 +26,7 @@ public class MemberService {
     private final PostService postService;
     private final CommentService commentService;
     private final FollowService followService;
+    private final ReplyService replyService;
     private final AmazonS3Service amazonS3Service;
 
     @Transactional(readOnly = true)
@@ -46,6 +48,7 @@ public class MemberService {
     public void delete(Long id) throws MalformedURLException {
         Member member = memberRepository.findById(id).get();
         followService.deleteFollowsByMember(member);
+        replyService.deleteAllByMember(member);
         commentService.deleteAllByMember(member);
         postService.deleteAllByMember(member);
         memberRepository.deleteById(id);

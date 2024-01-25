@@ -1,8 +1,8 @@
-package com.example.cowinstagram.comment.domain;
+package com.example.cowinstagram.reply.domain;
 
+import com.example.cowinstagram.comment.domain.Comment;
 import com.example.cowinstagram.member.domain.Member;
 import com.example.cowinstagram.post.domain.Post;
-import com.example.cowinstagram.reply.domain.Reply;
 import jakarta.persistence.*;
 import lombok.AccessLevel;
 import lombok.Builder;
@@ -12,7 +12,8 @@ import lombok.NoArgsConstructor;
 @Entity
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-public class Comment {
+public class Reply {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -22,20 +23,15 @@ public class Comment {
     private Member member;
 
     @ManyToOne(cascade = CascadeType.REMOVE)
-    @JoinColumn(name = "post")
-    private Post post;
+    @JoinColumn(name = "comment")
+    private Comment comment;
 
     private String content;
 
     @Builder
-    public Comment(Member member, Post post, String content) {
+    public Reply(Member member, Comment comment, String content) {
         this.member = member;
-        this.post = post;
-        this.content = content;
-    }
-
-    public Comment(Member member, String content) {
-        this.member = member;
+        this.comment = comment;
         this.content = content;
     }
 
