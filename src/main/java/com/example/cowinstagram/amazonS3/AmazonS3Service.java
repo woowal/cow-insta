@@ -11,6 +11,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
+import java.net.MalformedURLException;
+import java.net.URL;
 
 @Service
 @RequiredArgsConstructor
@@ -32,8 +34,9 @@ public class AmazonS3Service {
         return amazonS3.getUrl(bucket, originalFilename).toString();
     }
 
-    public void deleteImage(String originalFilename)  {
-        amazonS3.deleteObject(bucket, originalFilename);
+    public void deleteImage(String imageUrl) throws MalformedURLException {
+        URL url = new URL(imageUrl);
+        amazonS3.deleteObject(bucket, url.getFile());
     }
 
 }

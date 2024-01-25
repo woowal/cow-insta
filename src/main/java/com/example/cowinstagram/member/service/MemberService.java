@@ -1,5 +1,6 @@
 package com.example.cowinstagram.member.service;
 
+import com.example.cowinstagram.amazonS3.AmazonS3Service;
 import com.example.cowinstagram.comment.service.CommentService;
 import com.example.cowinstagram.follow.service.FollowService;
 import com.example.cowinstagram.member.domain.Member;
@@ -11,6 +12,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.net.MalformedURLException;
 import java.util.List;
 import java.util.NoSuchElementException;
 import java.util.stream.Collectors;
@@ -23,6 +25,7 @@ public class MemberService {
     private final PostService postService;
     private final CommentService commentService;
     private final FollowService followService;
+    private final AmazonS3Service amazonS3Service;
 
     @Transactional(readOnly = true)
     public MemberResponse findOne(String id) {
@@ -40,12 +43,13 @@ public class MemberService {
     }
 
     @Transactional
-    public void delete(Long id) {
+    public void delete(Long id) throws MalformedURLException {
         Member member = memberRepository.findById(id).get();
         followService.deleteFollowsByMember(member);
         commentService.deleteAllByMember(member);
         postService.deleteAllByMember(member);
         memberRepository.deleteById(id);
+        amazonS3Service.deleteImage(member.getImageUrl());
     }
 
     @Transactional(readOnly = true)

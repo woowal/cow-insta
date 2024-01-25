@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
+import java.net.MalformedURLException;
 import java.util.List;
 
 @RestController
@@ -47,7 +48,7 @@ public class PostController {
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> delete(@PathVariable("id") Long id) {
+    public ResponseEntity<Void> delete(@PathVariable("id") Long id) throws MalformedURLException {
 
         postService.delete(id);
 
@@ -58,6 +59,14 @@ public class PostController {
     public ResponseEntity<List> findAllByMemberId(@PathVariable("memberId") Long memberId) {
 
         List<PostResponse> postResponses = postService.findAllByMemberId(memberId);
+
+        return ResponseEntity.ok(postResponses);
+    }
+
+    @GetMapping("/feed/{userId}")
+    public ResponseEntity<List> findAllByFollowings(@PathVariable("userId") String userId) {
+
+        List<PostResponse> postResponses = postService.findAllByFollowings(userId);
 
         return ResponseEntity.ok(postResponses);
     }

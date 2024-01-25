@@ -11,4 +11,5 @@ public interface PostRepository extends JpaRepository<Post, Long> {
 
     List<Post> findAllByMember(Member member);
     void deleteAllByMember(Member member);
+    List<Post> findAllByMemberIn(List<Member> members);
 }
