@@ -59,5 +59,24 @@ public class CommentService {
                 .map(CommentResponse::from)
                 .collect(Collectors.toList());
     }
+
+    @Transactional(readOnly = true)
+    public List<CommentResponse> findAllByPostId(Long postId) {
+        Post post = postRepository.findById(postId).get();
+        return commentRepository.findAllByPost(post)
+                .stream()
+                .map(CommentResponse::from)
+                .toList();
+    }
+
+    @Transactional
+    public void deleteAllByPost(Post post) {
+        commentRepository.deleteAllByPost(post);
+    }
+
+    @Transactional
+    public void deleteAllByMember(Member member) {
+        commentRepository.deleteAllByMember(member);
+    }
 }
 

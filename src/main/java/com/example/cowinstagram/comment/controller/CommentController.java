@@ -25,14 +25,6 @@ public class CommentController {
         return ResponseEntity.ok().build();
     }
 
-    @GetMapping("/{id}")
-    public ResponseEntity<CommentResponse> findOne(@PathVariable("id") Long id) {
-
-        CommentResponse commentResponse = commentService.findOne(id);
-
-        return ResponseEntity.ok(commentResponse);
-    }
-
     @PatchMapping("/{id}")
     public ResponseEntity<Void> update(@PathVariable("id") Long id, @RequestBody CommentUpdateRequest commentUpdateRequest) {
 
@@ -49,10 +41,10 @@ public class CommentController {
         return ResponseEntity.ok().build();
     }
 
-    @GetMapping
-    public ResponseEntity<List> findAll() {
+    @GetMapping("/{postId}")
+    public ResponseEntity<List> findAllByPostId(@PathVariable("postId") Long postId) {
 
-        List<CommentResponse> commentResponses = commentService.findAll();
+        List<CommentResponse> commentResponses = commentService.findAllByPostId(postId);
 
         return ResponseEntity.ok(commentResponses);
     }

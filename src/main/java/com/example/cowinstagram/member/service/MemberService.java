@@ -1,8 +1,11 @@
 package com.example.cowinstagram.member.service;
 
+import com.example.cowinstagram.comment.service.CommentService;
+import com.example.cowinstagram.follow.service.FollowService;
 import com.example.cowinstagram.member.domain.Member;
 import com.example.cowinstagram.member.dto.request.MemberUpdateRequest;
 import com.example.cowinstagram.member.dto.response.MemberResponse;
+import com.example.cowinstagram.post.service.PostService;
 import com.example.cowinstagram.repository.MemberRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -17,6 +20,9 @@ import java.util.stream.Collectors;
 public class MemberService {
 
     private final MemberRepository memberRepository;
+    private final PostService postService;
+    private final CommentService commentService;
+    private final FollowService followService;
 
     @Transactional(readOnly = true)
     public MemberResponse findOne(String id) {
@@ -35,6 +41,10 @@ public class MemberService {
 
     @Transactional
     public void delete(Long id) {
+        Member member = memberRepository.findById(id).get();
+        followService.deleteFollowsByMember(member);
+        commentService.deleteAllByMember(member);
+        postService.deleteAllByMember(member);
         memberRepository.deleteById(id);
     }
 

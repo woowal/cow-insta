@@ -1,20 +1,24 @@
 package com.example.cowinstagram.comment.dto.response;
 
 import com.example.cowinstagram.comment.domain.Comment;
+import com.example.cowinstagram.member.domain.Member;
 import lombok.Getter;
 
 @Getter
 public class CommentResponse {
 
-    private Long id;
+    private Long memberId;
+    private String userId;
     private String content;
 
-    public CommentResponse(Long id, String content) {
-        this.id = id;
+    public CommentResponse(Long memberId, String userId, String content) {
+        this.memberId = memberId;
+        this.userId = userId;
         this.content = content;
     }
 
     public static CommentResponse from(Comment comment) {
-        return new CommentResponse(comment.getId(), comment.getContent());
+        Member member = comment.getMember();
+        return new CommentResponse(member.getId(), member.getUserId(), comment.getContent());
     }
 }

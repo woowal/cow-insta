@@ -1,11 +1,14 @@
 package com.example.cowinstagram.member.domain;
 
+import com.example.cowinstagram.follow.domain.Follow;
 import com.example.cowinstagram.member.dto.request.MemberUpdateRequest;
 import jakarta.persistence.*;
 import lombok.AccessLevel;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+
+import java.util.List;
 
 @Entity
 @Getter
