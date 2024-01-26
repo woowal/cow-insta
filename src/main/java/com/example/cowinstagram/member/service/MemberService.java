@@ -12,7 +12,9 @@ import com.example.cowinstagram.repository.MemberRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
 import java.net.MalformedURLException;
 import java.util.List;
 import java.util.NoSuchElementException;
@@ -38,9 +40,12 @@ public class MemberService {
     }
 
     @Transactional
-    public void update(Long id, MemberUpdateRequest memberUpdateRequest) {
+    public void update(Long id, MemberUpdateRequest memberUpdateRequest, MultipartFile multipartFile) throws IOException {
         Member member = memberRepository.findById(id)
                 .orElseThrow(() -> new NoSuchElementException("멤버가 존재하지 않습니다."));
+        amazonS3Service.deleteImage(member.getImageUrl());
+        String imageUrl = amazonS3Service.saveFile(multipartFile);
+        member.updateImageUrl(imageUrl);
         member.update(memberUpdateRequest);
     }
 
