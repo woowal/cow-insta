@@ -2,6 +2,8 @@ server:
   port: 8080
 
 spring:
+  profiles:
+    include: secret
   datasource:
     url: jdbc:mysql://localhost:3307/jpa?serverTimezone=UTC
     driver-class-name: com.mysql.cj.jdbc.Driver
@@ -24,14 +26,13 @@ cloud:
     s3:
       bucket: cowinsta
     credentials:
-      access-key: AKIAU6GDW5F3RS5UN2IX
-      secret-key: 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
+      access-key: ENC(hlfZvG+yIeRcaYP0TFNBe24tEmParNxrhmkkfTeLkqU=)
+      secret-key: ENC(Os4hmWqWPQPrfv5kUuFyJK0FSr9R/DBkfy1jvTOp5bqQOBZLvbQo5REfxcUwnzPenT6/MHX7q0A=)
     region:
       static: ap-southeast-2
       auto: false
     stack:
       auto: false
-
 jwt:
   secret:
     fsdgwr23524!dfswg43dfwfe@sgwrg!!sdgrgsdjoim!!!odvoiwslknie!!!!soivoihrgio
