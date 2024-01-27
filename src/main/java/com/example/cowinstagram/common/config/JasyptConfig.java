@@ -1,4 +1,4 @@
-package com.example.cowinstagram.common;
+package com.example.cowinstagram.common.config;
 
 import org.jasypt.encryption.StringEncryptor;
 import org.jasypt.encryption.pbe.PooledPBEStringEncryptor;

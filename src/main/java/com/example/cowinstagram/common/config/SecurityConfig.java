@@ -1,4 +1,4 @@
-package com.example.cowinstagram.common;
+package com.example.cowinstagram.common.config;
 
 import com.example.cowinstagram.auth.JwtAuthenticationFilter;
 import com.example.cowinstagram.auth.TokenProvider;

@@ -17,7 +17,6 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.NoSuchElementException;
-import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -55,13 +54,6 @@ public class CommentService {
         Comment comment = commentRepository.findById(id).get();
         replyService.deleteAllByComment(comment);
         commentRepository.deleteById(id);
-    }
-
-    @Transactional(readOnly = true)
-    public List<CommentResponse> findAll() {
-        return commentRepository.findAll().stream()
-                .map(CommentResponse::from)
-                .collect(Collectors.toList());
     }
 
     @Transactional(readOnly = true)
