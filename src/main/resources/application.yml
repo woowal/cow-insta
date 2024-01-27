@@ -21,13 +21,19 @@ spring:
         format_sql: true
     defer-datasource-initialization: true
 
+jasypt:
+  encryptor:
+    bean: jasyptStringEncryptor
+    password: thisissecret
+
 cloud:
   aws:
     s3:
       bucket: cowinsta
     credentials:
-      access-key: ENC(hlfZvG+yIeRcaYP0TFNBe24tEmParNxrhmkkfTeLkqU=)
-      secret-key: ENC(Os4hmWqWPQPrfv5kUuFyJK0FSr9R/DBkfy1jvTOp5bqQOBZLvbQo5REfxcUwnzPenT6/MHX7q0A=)
+      access-key: 3bzY03TJTAwWJyW8K1sbBEYBhcI2W9lPfftAPlZn98s=
+      secret-key: 6Gf5oEZYRDNKcefXBC/8iaTGEe6apjj9MQVBNAxh/xiW8URt0+qcg9W3oReB7VmpQRSdJkbJepY=
+
     region:
       static: ap-southeast-2
       auto: false
