@@ -1,11 +1,8 @@
 package com.example.cowinstagram.post.service;
 
 import com.example.cowinstagram.amazonS3.AmazonS3Service;
-import com.example.cowinstagram.comment.domain.Comment;
 import com.example.cowinstagram.comment.service.CommentService;
 import com.example.cowinstagram.follow.domain.Follow;
-import com.example.cowinstagram.follow.dto.response.FollowResponse;
-import com.example.cowinstagram.follow.service.FollowService;
 import com.example.cowinstagram.member.domain.Member;
 import com.example.cowinstagram.post.domain.Post;
 import com.example.cowinstagram.post.dto.request.PostCreateRequest;
@@ -52,10 +49,12 @@ public class PostService {
     }
 
     @Transactional
-    public void update(Long id, PostUpdateRequest postUpdateRequest) {
+    public void update(Long id, PostUpdateRequest postUpdateRequest, MultipartFile multipartFile) throws IOException {
         Post post = postRepository.findById(id)
                 .orElseThrow(() -> new NoSuchElementException("게시글이 존재하지 않습니다."));
-        post.update(postUpdateRequest.getImageUrl(), postUpdateRequest.getContent());
+        amazonS3Service.deleteImage(post.getImageUrl());
+        String imageUrl = amazonS3Service.saveFile(multipartFile);
+        post.update(imageUrl, postUpdateRequest.getContent());
     }
 
     @Transactional
@@ -68,6 +67,18 @@ public class PostService {
 
     @Transactional
     public void deleteAllByMember(Member member) {
+        postRepository.findAllByMember(member)
+                .stream()
+                .map(Post::getImageUrl)
+                .map((imageUrl) -> {
+                    try {
+                         amazonS3Service.deleteImage(imageUrl);
+                    } catch (MalformedURLException e) {
+                        throw new RuntimeException(e);
+                    }
+                    return null;
+                });
+
         postRepository.deleteAllByMember(member);
     }
 

@@ -45,18 +45,17 @@ public class MemberControllerTest {
 
         when(memberService.findOne(Mockito.anyString())).thenReturn(memberResponse);
 
-        mockMvc.perform(MockMvcRequestBuilders.get("/api/members/testUserId"))
+        mockMvc.perform(MockMvcRequestBuilders.get("/api/members/{userId}", memberResponse.getId()))
                 .andExpect(status().isOk())
-                .andExpect(content().contentType(MediaType.APPLICATION_JSON)); // JSON 응답 확인
+                .andExpect(content().contentType(MediaType.APPLICATION_JSON))
+                .andExpect(jsonPath("$.id").value(memberResponse.getId()));
     }
 
     @Test
     void deleteSuccess() throws Exception {
-        // Given
         Long memberId = 1L;
         doNothing().when(memberService).delete(memberId);
 
-        // When & Then
         mockMvc.perform(delete("/api/members/{id}", memberId))
                 .andExpect(status().isOk());
     }
@@ -69,13 +68,13 @@ public class MemberControllerTest {
         mockMvc.perform(get("/api/members"))
                 .andExpect(status().isOk())
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON))
-                .andExpect(jsonPath("$[0].id").value("someId"));
+                .andExpect(jsonPath("$[0].id").value(1));
     }
 
     private MemberResponse createMemberResponse() {
         return MemberResponse.builder()
-                .id(3L)
-                .name("임우")
+                .id(1L)
+                .name("이름")
                 .imageUrl("https://cowinsta.s3.ap-southeast-2.amazonaws.com/%EC%8A%A4%ED%81%AC%EB%A6%B0%EC%83%B7%202024-01-02%20161224.png")
                 .build();
     }

@@ -30,8 +30,8 @@ public class Post {
         this.content = content;
     }
 
-    public void update(String title, String content) {
-        this.imageUrl = title;
+    public void update(String imageUrl, String content) {
+        this.imageUrl = imageUrl;
         this.content = content;
     }
 }

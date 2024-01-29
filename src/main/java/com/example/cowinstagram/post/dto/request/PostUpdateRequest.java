@@ -5,7 +5,6 @@ import lombok.Getter;
 @Getter
 public class PostUpdateRequest {
 
-    private String imageUrl;
     private String content;
 
 }

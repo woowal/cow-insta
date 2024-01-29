@@ -40,9 +40,11 @@ public class PostController {
     }
 
     @PatchMapping("/{id}")
-    public ResponseEntity<Void> update(@PathVariable("id") Long id, @RequestBody PostUpdateRequest postUpdateRequest) {
+    public ResponseEntity<Void> update(@PathVariable("id") Long id, @RequestBody PostUpdateRequest postUpdateRequest,
+                                       @Parameter(description = "multipart/form-data 형식의 이미지를 input으로 받는다.")
+                                       @RequestPart(value = "multipartFile") MultipartFile multipartFile) throws IOException {
 
-        postService.update(id, postUpdateRequest);
+        postService.update(id, postUpdateRequest, multipartFile);
 
         return ResponseEntity.ok().build();
     }
@@ -55,7 +57,7 @@ public class PostController {
         return ResponseEntity.ok().build();
     }
 
-    @GetMapping("/{memberId}")
+    @GetMapping("/member/{memberId}")
     public ResponseEntity<List> findAllByMemberId(@PathVariable("memberId") Long memberId) {
 
         List<PostResponse> postResponses = postService.findAllByMemberId(memberId);
