@@ -1,5 +1,6 @@
-package com.example.cowinstagram.member.controller;
+package com.example.cowinstagram.member;
 
+import com.example.cowinstagram.member.controller.MemberController;
 import com.example.cowinstagram.member.dto.response.MemberResponse;
 import com.example.cowinstagram.member.service.MemberService;
 import org.junit.jupiter.api.Test;
