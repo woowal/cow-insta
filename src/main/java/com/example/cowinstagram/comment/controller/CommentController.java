@@ -25,10 +25,10 @@ public class CommentController {
         return ResponseEntity.ok().build();
     }
 
-    @PatchMapping("/{id}")
-    public ResponseEntity<Void> update(@PathVariable("id") Long id, @RequestBody CommentUpdateRequest commentUpdateRequest) {
+    @PatchMapping
+    public ResponseEntity<Void> update(@RequestBody CommentUpdateRequest commentUpdateRequest) {
 
-        commentService.update(id, commentUpdateRequest);
+        commentService.update(commentUpdateRequest);
 
         return ResponseEntity.ok().build();
     }

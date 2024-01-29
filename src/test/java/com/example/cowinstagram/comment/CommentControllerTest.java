@@ -47,6 +47,8 @@ public class CommentControllerTest {
         ObjectMapper objectMapper = new ObjectMapper();
         String requestJson = objectMapper.writeValueAsString(commentCreateRequest);
 
+        doNothing().when(commentService).create(any(CommentCreateRequest.class));
+
         mockMvc.perform(post("/api/comments")
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(requestJson))

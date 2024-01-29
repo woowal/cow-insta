@@ -25,10 +25,10 @@ public class ReplyController {
         return ResponseEntity.ok().build();
     }
 
-    @PatchMapping("/{id}")
-    public ResponseEntity<Void> update(@PathVariable("id") Long id, @RequestBody ReplyUpdateRequest replyUpdateRequest) {
+    @PatchMapping
+    public ResponseEntity<Void> update(@RequestBody ReplyUpdateRequest replyUpdateRequest) {
 
-        replyService.update(id, replyUpdateRequest);
+        replyService.update(replyUpdateRequest);
 
         return ResponseEntity.ok().build();
     }

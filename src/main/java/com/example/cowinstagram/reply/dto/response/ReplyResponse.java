@@ -2,8 +2,10 @@ package com.example.cowinstagram.reply.dto.response;
 
 import com.example.cowinstagram.member.domain.Member;
 import com.example.cowinstagram.reply.domain.Reply;
+import lombok.Builder;
 import lombok.Getter;
 
+@Builder
 @Getter
 public class ReplyResponse {
 

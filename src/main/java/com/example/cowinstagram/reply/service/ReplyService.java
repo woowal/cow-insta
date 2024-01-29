@@ -32,8 +32,8 @@ public class ReplyService {
     }
 
     @Transactional
-    public void update(Long id, ReplyUpdateRequest replyUpdateRequest) {
-        Reply reply = replyRepository.findById(id)
+    public void update(ReplyUpdateRequest replyUpdateRequest) {
+        Reply reply = replyRepository.findById(replyUpdateRequest.getId())
                 .orElseThrow(() -> new NoSuchElementException("답글이 존재하지 않습니다."));
         reply.update(replyUpdateRequest.getContent());
     }
