@@ -32,8 +32,8 @@ public class MemberService {
     private final AmazonS3Service amazonS3Service;
 
     @Transactional(readOnly = true)
-    public MemberResponse findOne(String id) {
-        Member member = memberRepository.findByUserId(id)
+    public MemberResponse findOne(String userId) {
+        Member member = memberRepository.findByUserId(userId)
                 .orElseThrow(() -> new NoSuchElementException("멤버가 존재하지 않습니다."));
 
         return MemberResponse.from(member);

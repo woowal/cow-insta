@@ -20,10 +20,10 @@ public class MemberController {
 
     private final MemberService memberService;
 
-    @GetMapping("/{id}")
-    public ResponseEntity<MemberResponse> findOne(@PathVariable("id") String id) {
+    @GetMapping("/{userId}")
+    public ResponseEntity<MemberResponse> findOne(@PathVariable("userId") String userId) {
 
-        MemberResponse memberResponse = memberService.findOne(id);
+        MemberResponse memberResponse = memberService.findOne(userId);
 
         return ResponseEntity.ok(memberResponse);
     }
