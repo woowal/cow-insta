@@ -2,8 +2,10 @@ package com.example.cowinstagram.auth.dto.request;
 
 import com.example.cowinstagram.member.domain.Member;
 import jakarta.validation.constraints.NotBlank;
+import lombok.Builder;
 import lombok.Getter;
 
+@Builder
 @Getter
 public class AuthRegisterRequest {
 

@@ -1,4 +1,4 @@
-package com.example.cowinstagram.auth;
+package com.example.cowinstagram.auth.service;
 
 import com.example.cowinstagram.repository.MemberRepository;
 import com.example.cowinstagram.member.domain.Member;

@@ -5,6 +5,7 @@ import com.example.cowinstagram.post.dto.response.PostResponse;
 import com.example.cowinstagram.post.service.PostService;
 import org.junit.Before;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
@@ -41,6 +42,7 @@ public class PostControllerTest {
     }
 
     @Test
+    @DisplayName("사용자는 게시글 생성에 성공한다")
     public void findByIdSuccess() throws Exception {
         PostResponse postResponse = createPostResponse();
 
@@ -53,6 +55,7 @@ public class PostControllerTest {
     }
 
     @Test
+    @DisplayName("사용자는 게시글 삭제에 성공한다")
     public void deleteSuccess() throws Exception {
         long postId = 1L;
 
@@ -63,26 +66,26 @@ public class PostControllerTest {
     }
 
     @Test
-    void testFindAllByMemberId() throws Exception {
+    @DisplayName("사용자는 특정 사용자의 게시글 조회에 성공한다")
+    void findAllByMemberIdSuccess() throws Exception {
         PostResponse postResponse = createPostResponse();
         long memberId = 1L;
-        // When
+
         when(postService.findAllByMemberId(memberId)).thenReturn(Collections.singletonList(postResponse));
 
-        // Then
         mockMvc.perform(get("/api/posts/member/{memberId}", memberId))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$[0].id").exists());
     }
 
     @Test
-    void testFindAllByFollowings() throws Exception {
+    @DisplayName("사용자는 팔로잉한 사용자들의 게시글 조회에 성공한다")
+    void findAllByFollowingsSuccess() throws Exception {
         PostResponse postResponse = createPostResponse();
-        String userId = "testUserId";
-        // When
+        String userId = "userId";
+
         when(postService.findAllByFollowings(userId)).thenReturn(Collections.singletonList(postResponse));
 
-        // Then
         mockMvc.perform(get("/api/posts/feed/{userId}", userId))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$[0].id").exists());
@@ -91,8 +94,8 @@ public class PostControllerTest {
     private PostResponse createPostResponse() {
         return PostResponse.builder()
                 .id(1L)
-                .imageUrl("https://cowinsta.s3.ap-southeast-2.amazonaws.com/%EC%8A%A4%ED%81%AC%EB%A6%B0%EC%83%B7%202024-01-02%20161224.png")
-                .userId("jijile")
+                .imageUrl("imageurl")
+                .userId("userid")
                 .content("content")
                 .build();
     }

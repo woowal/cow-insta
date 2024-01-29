@@ -7,6 +7,7 @@ import com.example.cowinstagram.reply.dto.response.ReplyResponse;
 import com.example.cowinstagram.reply.service.ReplyService;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
@@ -44,7 +45,8 @@ public class ReplyControllerTest {
     private MockMvc mockMvc;
 
     @Test
-    void testCreateReply() throws Exception {
+    @DisplayName("사용자는 답글 생성에 성공한다")
+    void createReplySuccess() throws Exception {
         ReplyCreateRequest request = createReplyCreateRequest();
 
         doNothing().when(replyService).create(any(ReplyCreateRequest.class));
@@ -56,7 +58,8 @@ public class ReplyControllerTest {
     }
 
     @Test
-    void testUpdateReply() throws Exception {
+    @DisplayName("사용자는 답글 수정에 성공한다")
+    void updateReplySuccess() throws Exception {
         ReplyUpdateRequest request = createReplyUpdateRequest();
 
         doNothing().when(replyService).update(any(ReplyUpdateRequest.class));
@@ -68,7 +71,8 @@ public class ReplyControllerTest {
     }
 
     @Test
-    void testDeleteReply() throws Exception {
+    @DisplayName("사용자는 답글 삭제에 성공한다")
+    void deleteReplySuccess() throws Exception {
         long replyId = 1L;
 
         doNothing().when(replyService).delete(anyLong());
@@ -78,7 +82,8 @@ public class ReplyControllerTest {
     }
 
     @Test
-    void testFindAllByCommentId() throws Exception {
+    @DisplayName("사용자는 특정 댓글의 답글 조회에 성공한다")
+    void findAllByCommentIdSuccess() throws Exception {
         long commentId = 1L;
         ReplyResponse replyResponse = createReplyResponse();
 

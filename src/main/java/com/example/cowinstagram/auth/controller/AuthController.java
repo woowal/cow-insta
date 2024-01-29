@@ -30,7 +30,6 @@ public class AuthController {
     public ResponseEntity<Void> register(@RequestPart AuthRegisterRequest authRegisterRequest,
                                          @Parameter(description = "multipart/form-data 형식의 이미지를 input으로 받는다.")
                                          @RequestPart(value = "multipartFile") MultipartFile multipartFile) throws IOException {
-
         authService.register(authRegisterRequest, multipartFile);
 
         return ResponseEntity.ok().build();

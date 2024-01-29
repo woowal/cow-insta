@@ -7,6 +7,7 @@ import com.example.cowinstagram.comment.dto.response.CommentResponse;
 import com.example.cowinstagram.comment.service.CommentService;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
@@ -41,6 +42,7 @@ public class CommentControllerTest {
     }
 
     @Test
+    @DisplayName("사용자는 댓글 생성에 성공한다")
     void createSuccess() throws Exception {
         CommentCreateRequest commentCreateRequest = createCommentCreateRequest();
 
@@ -57,7 +59,8 @@ public class CommentControllerTest {
     }
 
     @Test
-    void testUpdateComment() throws Exception {
+    @DisplayName("사용자는 댓글 수정에 성공한다")
+    void updateSuccess() throws Exception {
         CommentUpdateRequest commentUpdateRequest = createUpdateRequest();
 
         ObjectMapper objectMapper = new ObjectMapper();
@@ -65,7 +68,6 @@ public class CommentControllerTest {
 
         doNothing().when(commentService).update(any(CommentUpdateRequest.class));
 
-        // Then
         mockMvc.perform(patch("/api/comments")
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(requestJson))
@@ -73,7 +75,8 @@ public class CommentControllerTest {
     }
 
     @Test
-    void testDeleteComment() throws Exception {
+    @DisplayName("사용자는 댓글 삭제에 성공한다")
+    void deleteSuccess() throws Exception {
         long commentId = 1L;
 
         doNothing().when(commentService).delete(anyLong());
@@ -83,7 +86,8 @@ public class CommentControllerTest {
     }
 
     @Test
-    void testFindAllByPostId() throws Exception {
+    @DisplayName("사용자는 특정 게시글의 댓글 조회에 성공한다")
+    void findAllByPostIdSuccess() throws Exception {
         long postId = 1L;
         CommentResponse commentResponse = createCommentResponse();
 

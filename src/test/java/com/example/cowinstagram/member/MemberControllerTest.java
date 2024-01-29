@@ -3,6 +3,7 @@ package com.example.cowinstagram.member;
 import com.example.cowinstagram.member.controller.MemberController;
 import com.example.cowinstagram.member.dto.response.MemberResponse;
 import com.example.cowinstagram.member.service.MemberService;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.BeforeEach;
 import org.mockito.InjectMocks;
@@ -40,6 +41,7 @@ public class MemberControllerTest {
     }
 
     @Test
+    @DisplayName("사용자는 특정 사용자 조회에 성공한다")
     public void findByIdSuccess() throws Exception {
         MemberResponse memberResponse = createMemberResponse();
 
@@ -52,6 +54,7 @@ public class MemberControllerTest {
     }
 
     @Test
+    @DisplayName("사용자는 사용자 삭제에 성공한다")
     void deleteSuccess() throws Exception {
         Long memberId = 1L;
         doNothing().when(memberService).delete(memberId);
@@ -61,8 +64,10 @@ public class MemberControllerTest {
     }
 
     @Test
+    @DisplayName("사용자는 전체 사용자 조회에 성공한다")
     void findAllSuccess() throws Exception {
         MemberResponse mockResponse = createMemberResponse();
+
         when(memberService.findAll()).thenReturn(Collections.singletonList(mockResponse));
 
         mockMvc.perform(get("/api/members"))
@@ -75,7 +80,7 @@ public class MemberControllerTest {
         return MemberResponse.builder()
                 .id(1L)
                 .name("이름")
-                .imageUrl("https://cowinsta.s3.ap-southeast-2.amazonaws.com/%EC%8A%A4%ED%81%AC%EB%A6%B0%EC%83%B7%202024-01-02%20161224.png")
+                .imageUrl("imageurl")
                 .build();
     }
 }

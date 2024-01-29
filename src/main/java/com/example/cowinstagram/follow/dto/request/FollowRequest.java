@@ -2,8 +2,10 @@ package com.example.cowinstagram.follow.dto.request;
 
 import com.example.cowinstagram.follow.domain.Follow;
 import com.example.cowinstagram.member.domain.Member;
+import lombok.Builder;
 import lombok.Getter;
 
+@Builder
 @Getter
 public class FollowRequest {
 
