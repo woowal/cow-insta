@@ -35,7 +35,7 @@ public class CommentService {
     }
 
     @Transactional(readOnly = true)
-    public CommentResponse findOne(Long id) {
+    public CommentResponse findById(Long id) {
         Comment comment = commentRepository.findById(id)
                 .orElseThrow(() -> new NoSuchElementException("댓글이 존재하지 않습니다."));
 
@@ -43,8 +43,8 @@ public class CommentService {
     }
 
     @Transactional
-    public void update(Long id, CommentUpdateRequest commentUpdateRequest) {
-        Comment comment = commentRepository.findById(id)
+    public void update(CommentUpdateRequest commentUpdateRequest) {
+        Comment comment = commentRepository.findById(commentUpdateRequest.getId())
                 .orElseThrow(() -> new NoSuchElementException("댓글이 존재하지 않습니다."));
         comment.update(commentUpdateRequest.getContent());
     }
