@@ -39,4 +39,4 @@ jobs:
           aws s3 sync \
             --region ap-southeast-2 \
             build s3://cowinsta \
-            
+            --delete
