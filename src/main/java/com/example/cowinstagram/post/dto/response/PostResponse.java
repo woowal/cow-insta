@@ -1,6 +1,5 @@
 package com.example.cowinstagram.post.dto.response;
 
-import com.example.cowinstagram.comment.domain.Comment;
 import com.example.cowinstagram.post.domain.Post;
 import lombok.Builder;
 import lombok.Getter;

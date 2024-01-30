@@ -2,7 +2,6 @@ package com.example.cowinstagram.reply.domain;
 
 import com.example.cowinstagram.comment.domain.Comment;
 import com.example.cowinstagram.member.domain.Member;
-import com.example.cowinstagram.post.domain.Post;
 import jakarta.persistence.*;
 import lombok.AccessLevel;
 import lombok.Builder;
