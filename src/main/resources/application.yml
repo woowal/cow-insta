@@ -28,7 +28,7 @@ jasypt:
 cloud:
   aws:
     s3:
-      bucket: cowinsta
+      bucket: cowinstagram
     credentials:
       access-key: 3bzY03TJTAwWJyW8K1sbBEYBhcI2W9lPfftAPlZn98s=
       secret-key: 6Gf5oEZYRDNKcefXBC/8iaTGEe6apjj9MQVBNAxh/xiW8URt0+qcg9W3oReB7VmpQRSdJkbJepY=
