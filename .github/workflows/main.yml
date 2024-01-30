@@ -72,7 +72,7 @@ jobs:
           aws-region: ap-southeast-2
 
       - name: Upload S3
-        run: aws s3 cp --region ap-southeast-2 ./deploy.zip s3://ci-cd-test-123/ci-cd/
+        run: aws s3 cp --region ap-southeast-2 ./deploy.zip s3://cowinsta
 
       - name: Code Deploy
         run: aws deploy create-deployment --application-name cd-test --deployment-config-name CodeDeployDefault.AllAtOnce --deployment-group-name CD --s3-location bucket=ci-cd-test-123,key=ci-cd/deploy.zip,bundleType=zip
