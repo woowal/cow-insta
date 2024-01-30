@@ -48,3 +48,23 @@ jobs:
         env:
           MYSQL_PASSWORD: ${{ secrets.MYSQL_PASSWORD }}
 
+      - name: Make dir
+        run: mkdir cicd
+
+      - name: Copy jar
+        run: cp ./build/libs/*.jar ./cicd
+
+      - name: Copy appspec
+        run: cp ./appspec.yml ./cicd
+
+      - name: Copy script
+        run: cp ./deploy.sh ./cicd
+
+      - name: Make zip
+        run: zip -r -qq -j ./deploy.zip ./cicd
+      - run: ls -al
+
+      - name: Upload S3
+        run: aws s3 cp --region ap-southeast-2 ./deploy.zip s3://ci-cd-test-123/ci-cd/
+      - name: Code Deploy
+        run: aws deploy create-deployment --application-name cd-test --deployment-config-name CodeDeployDefault.AllAtOnce --deployment-group-name CD --s3-location bucket=ci-cd-test-123,bundleType=zip,key=ci-cd/deploy.zip
