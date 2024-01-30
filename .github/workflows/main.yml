@@ -75,5 +75,5 @@ jobs:
         run: aws s3 cp --region ap-northeast-2 ./deploy.zip s3://cowinstagram
 
       - name: Code Deploy
-        run: aws deploy create-deployment --application-name cowinsta --deployment-config-name CodeDeployDefault.AllAtOnce --deployment-group-name cow --s3-location bucket=cowinsta,key=deploy.zip,bundleType=zip
+        run: aws deploy create-deployment --application-name cowinsta --deployment-config-name CodeDeployDefault.AllAtOnce --deployment-group-name cow --s3-location bucket=cowinstagram,key=deploy.zip,bundleType=zip
 
