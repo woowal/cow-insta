@@ -43,5 +43,8 @@ jobs:
             --delete
 
       - name: MySQL
+        run: |
+          echo "MYSQL_PASSWORD=MYSQL_PASSWORD" >> .env
         env:
           MYSQL_PASSWORD: ${{ secrets.MYSQL_PASSWORD }}
+
