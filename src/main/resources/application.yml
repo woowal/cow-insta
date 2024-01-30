@@ -7,7 +7,7 @@ spring:
   datasource:
     url: jdbc:mysql://cowinsta.c3oss08cegbp.ap-northeast-2.rds.amazonaws.com:3306/cowinsta?serverTimezone=Asia/Seoul&characterEncoding=UTF-8
     username: admin
-    password: ${MYSQL_PASSWORD}
+    password: 123cowinsta
 
   jpa:
     hibernate:
